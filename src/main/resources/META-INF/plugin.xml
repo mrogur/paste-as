@@ -1,0 +1,25 @@
+<idea-plugin>
+    <id>dev.wlazlo.paste-as</id>
+    <name>Paste As...</name>
+    <vendor email="pawel@wlazlo.dev" url="http://wlazlo.dev">wlazlo.dev</vendor>
+
+    <description><![CDATA[
+    Plugin for pasting things with additional actions.
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="PasteAs" text="Paste As..." description="Paste as plugin...">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <action id="PasteAsAction" class="PasteAsAction" text="Paste As Action" description="Paste as action"/>
+        </group>
+    </actions>
+</idea-plugin>
