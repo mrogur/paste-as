@@ -1,13 +1,15 @@
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.ui.layout.panel
+import java.awt.Dimension
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
+import javax.swing.JPanel
 import javax.swing.JTextField
-
 
 class PasteAsAction : AnAction() {
 
@@ -29,8 +31,30 @@ class PasteAsAction : AnAction() {
         )*/
 
         val sampleDialogWrapper = SampleDialogWrapper()
-        sampleDialogWrapper.show();
+//        sampleDialogWrapper.show();
+        val userField = JTextField()
+        val passwordField = JTextField()
+
+        val panel = panel {
+            noteRow("Specify text to replace.")
+            row("Search:") { userField() }
+            row("Replace:") { passwordField() }
+        }
+
+
+
+        val createComponentPopupBuilder =
+            JBPopupFactory.getInstance().createComponentPopupBuilder(panel, userField)
+
+        val popup = createComponentPopupBuilder.createPopup()
+        popup.setMinimumSize(Dimension(500, 200))
+//        popup.showCenteredInCurrentWindow(e.project!!)
+        e.getData(PlatformDataKeys.EDITOR)?.let {
+            popup.showInBestPositionFor(it)
+        }
+
 
     }
 }
+
 
